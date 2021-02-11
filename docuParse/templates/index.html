@@ -9,7 +9,7 @@
     <span class="sr-only">Loading...</span>
   </div>
   <h1>Parsing Document.....</h1>
-  <p>This should take a minute</p> <span id="timer">01:30<span> 
+  <p>This should take a minute</p> <span id="timer">01:60<span> 
 </div>
 
 <style type="text/css">
@@ -108,21 +108,21 @@
 	$(document).ready(function(){
 	  $("#myform").on("submit", function(){
 	    $("#pageloader").fadeIn();
+		  var minute = 1;
+		  var sec = 60;
+		  setInterval(function() {
+		    document.getElementById("timer").innerHTML = minute + " : " + sec;
+		    sec--;
+		    if (sec == 00) {
+		      minute --;
+		      sec = 60;
+		      if (minute == 0 && sec== 00 ) {
+		        minute = 1;
+		        sec = 60
+		      }
+		    }
+		  }, 1000);
 	  });//submit
-	  var minute = 1;
-	  var sec = 60;
-	  setInterval(function() {
-	    document.getElementById("timer").innerHTML = minute + " : " + sec;
-	    sec--;
-	    if (sec == 00) {
-	      minute --;
-	      sec = 60;
-	      if (minute == 0 && sec== 00 ) {
-	        minute = 1;
-	        sec = 60
-	      }
-	    }
-	  }, 1000);
 	});//document ready
 </script>
 

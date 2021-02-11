@@ -369,6 +369,8 @@ def parser(image):
                     else:
                         if key != '':
                             extracted_values.append(contents[i])
+        else:
+	        extracted_values.append({'Oops!':'document has a different structure'})
 
     
     return extracted_values
