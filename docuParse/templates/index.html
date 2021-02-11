@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div id="pageloader" class="text-center">
+	<br>
+	<br>
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <h1>Parsing Document.....</h1>
+  <p>This should take a minute</p> <span id="timer">01:30<span> 
+</div>
+
+<style type="text/css">
+	#pageloader
+{
+  background: rgba( 255, 255, 255, 0.8 );
+  display: none;
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+</style>
+
+
+<style type="text/css">
+	#first {
+	    position: fixed;
+	    z-index: 2;
+		}
+
+	#second {
+	    position: fixed;
+	    z-index: 1;   
+	}
+	#output3{
+		/* Add the blur effect */
+	  filter: blur(5px);
+	  -webkit-filter: blur(5px);
+	}
+</style>
+<!-- 
+<div id="second" style="width: 100vw; height: 50vh">
+	<img id="output3" style="width: 100px" />
+</div> -->
+
+<div style="">
+	<img id="output3" style="position:fixed; width: 100vw; height: 100vh" />
+<div class="container" >
+	<br>
+	<br>
+	<div >
+	<div class="row">
+		
+	    <div class="col">
+	      
+	    </div>
+	    <div class="col-7 "  style="justify-content: center">
+	    	<form id="myform" method="post" enctype="multipart/form-data">
+	    		{% csrf_token %}
+		     <div  class="jumbotron" style="background-color: grey; padding: 10px; padding-bottom: 1px">
+				<div class="jumbotron" style="background-color: #b8b7b5; padding-top: 0px" >
+					<p class="text-center" style="font-family: cursive; color: white; font-weight: bolder; font-size: 26px; padding-top: 0px; margin-top: 0px;">Upload Document </p><hr>
+					<div class="container text-center">
+						<div class="custom-file">
+						  <input type="file" accept="image/*" onchange="loadFile2(event)" class="custom-file-input" id="customFile" name="filename" required="required">
+						  <label class="custom-file-label" for="customFile">Click to Select file</label>
+						</div>
+					
+						<script>
+						  var loadFile2 = function(event) {
+						    var output2 = document.getElementById('output2');
+						    var output3 = document.getElementById('output3');
+						    output2.src = URL.createObjectURL(event.target.files[0]);
+						    output3.src = URL.createObjectURL(event.target.files[0]);
+						    output2.onload = function() {
+						      URL.revokeObjectURL(output2.src) // free memory
+						    }
+						    output3.onload = function() {
+						      URL.revokeObjectURL(output3.src) // free memory
+						    }
+						  };
+						</script>
+						<p class="mt-2"><img style="justify-content: center" id="output2" height="200" /></p>
+					</div>
+				</div>
+			</div>
+			<center style="padding-top: 0px">
+				<button style="padding-top: 0px" type="submit" class=" btn btn-outline-secondary btn-lg"> Upload and Process</button>
+			</center>
+		</form>
+	    </div>
+	    <div class="col">
+
+	      
+	    </div>
+  </div>
+  
+  </div>
+
+  
+</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+	  $("#myform").on("submit", function(){
+	    $("#pageloader").fadeIn();
+	  });//submit
+	  var minute = 1;
+	  var sec = 60;
+	  setInterval(function() {
+	    document.getElementById("timer").innerHTML = minute + " : " + sec;
+	    sec--;
+	    if (sec == 00) {
+	      minute --;
+	      sec = 60;
+	      if (minute == 0 && sec== 00 ) {
+	        minute = 1;
+	        sec = 60
+	      }
+	    }
+	  }, 1000);
+	});//document ready
+</script>
+
+
+
+{% endblock %}

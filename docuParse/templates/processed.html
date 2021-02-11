@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container">
+<br>
+<div style="background-color: white">
+  	 {% if doc_parser %}
+  	 <h2 style="font-weight: bolder; color: teal">Extracted Values</h2> <a class="btn btn-info" href="{{media_path}}" download="{{media_path}}" style="float:right;">Download</a>
+  	 {% for item in  doc_parser%}
+  	 {% for key, val in item.items %}
+  	 <ul>
+  	 	<li>
+  	 		<p><b>{{key}}:</b> {{val}}</p>
+  	 	</li>
+  	 </ul>
+  	 {% endfor %}
+  	 {% endfor %}
+  	 {% endif %}
+  </div>
+<br>
+ <!-- <center>
+ 	<a class="btn btn-outline-info" href="{{csv_path}}" download="{{csv_path}}">Download csv</a>
+ </center>
+ -->
+</div>
+{% endblock %}
